@@ -1,0 +1,28 @@
+[debug] [2024-11-26T22:45:38.205Z] ----------------------------------------------------------------------
+[debug] [2024-11-26T22:45:38.208Z] Command:       /nix/store/if6aqyl3sl0hz14a12mndj35swb1mcwi-nodejs-20.17.0/bin/node /home/user/.global_modules/bin/firebase login
+[debug] [2024-11-26T22:45:38.209Z] CLI Version:   13.27.0
+[debug] [2024-11-26T22:45:38.209Z] Platform:      linux
+[debug] [2024-11-26T22:45:38.209Z] Node Version:  v20.17.0
+[debug] [2024-11-26T22:45:38.209Z] Time:          Tue Nov 26 2024 22:45:38 GMT+0000 (Coordinated Universal Time)
+[debug] [2024-11-26T22:45:38.209Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again. 
+[debug] [2024-11-26T22:45:41.398Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2024-11-26T22:45:41.398Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"c716ae51-56af-4c7a-bb02-5d41bd9f841a"}
+[debug] [2024-11-26T22:45:42.517Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2024-11-26T22:45:42.517Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"B6w2c6h57F21PxD-hWkhAixdsvdDuiEY5cTJ3RCgUUs"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    C716A
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=yQRwwPm9LriO6xnzPJb97HFV78Rhq33XEn_Z73N1Prg&session=c716ae51-56af-4c7a-bb02-5d41bd9f841a&attest=B6w2c6h57F21PxD-hWkhAixdsvdDuiEY5cTJ3RCgUUs
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
