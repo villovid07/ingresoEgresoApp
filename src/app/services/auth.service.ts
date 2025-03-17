@@ -29,8 +29,8 @@ export class AuthService {
           nombre,
           user?.email ? user.email : ''
         );
-        const collectionRef = collection(this.firestore, 'users');
-        const docRef = doc(this.firestore, 'users', user ? user.uid : '');
+        const collectionRef = collection(this.firestore, user ? user.uid : '');
+        const docRef = doc(this.firestore, user ? user.uid : '', 'user');
         return setDoc(docRef, { ...newUser });
       });
   }
@@ -46,7 +46,7 @@ export class AuthService {
   initAuthListener() {
     this.auth.authState.subscribe((user) => {
       if (user) {
-        const docref = doc(this.firestore, `users/${user.uid}`);
+        const docref = doc(this.firestore, `${user.uid}/user`);
         this.userSubscrition = onSnapshot(docref, (doc) => {
           if (doc.exists()) {
             const user = Usuario.fromFirestore(doc.data());
