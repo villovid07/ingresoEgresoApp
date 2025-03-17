@@ -4,4 +4,8 @@ export class Usuario {
     public nombre: string,
     public email: string
   ) {}
+
+  static fromFirestore({ uid, nombre, email }: any) {
+    return new Usuario(uid, nombre, email);
+  }
 }

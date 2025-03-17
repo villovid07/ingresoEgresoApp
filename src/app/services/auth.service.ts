@@ -2,17 +2,25 @@ import { Injectable, inject } from '@angular/core';
 import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
+import { AppState } from '../app.reducer';
+import { Store } from '@ngrx/store';
+import { setUser, unSetUser } from '../auth/auth.actions';
+import { getDoc, onSnapshot, Unsubscribe } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: AngularFireAuth, private firestore: Firestore) {}
+  userSubscrition!: Unsubscribe;
+  constructor(
+    private auth: AngularFireAuth,
+    private firestore: Firestore,
+    private store: Store<AppState>
+  ) {}
 
   crearUsuario(nombre: string, email: string, password: string) {
-    console.log(nombre, email, password);
     return this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(({ user }) => {
@@ -37,8 +45,20 @@ export class AuthService {
 
   initAuthListener() {
     this.auth.authState.subscribe((user) => {
-      console.log(user?.email);
-      console.log(user?.uid);
+      if (user) {
+        const docref = doc(this.firestore, `users/${user.uid}`);
+        this.userSubscrition = onSnapshot(docref, (doc) => {
+          if (doc.exists()) {
+            const user = Usuario.fromFirestore(doc.data());
+            this.store.dispatch(setUser({ user }));
+          } else {
+            console.log('no document found');
+          }
+        });
+      } else {
+        this.userSubscrition();
+        this.store.dispatch(unSetUser());
+      }
     });
   }
 
