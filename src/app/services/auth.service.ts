@@ -14,11 +14,16 @@ import { getDoc, onSnapshot, Unsubscribe } from 'firebase/firestore';
 })
 export class AuthService {
   userSubscrition!: Unsubscribe;
+  private _user!:Usuario | null;
   constructor(
     private auth: AngularFireAuth,
     private firestore: Firestore,
     private store: Store<AppState>
   ) {}
+
+  get user(){
+    return {...this._user};
+  }
 
   crearUsuario(nombre: string, email: string, password: string) {
     return this.auth
@@ -50,12 +55,14 @@ export class AuthService {
         this.userSubscrition = onSnapshot(docref, (doc) => {
           if (doc.exists()) {
             const user = Usuario.fromFirestore(doc.data());
+            this._user = user;
             this.store.dispatch(setUser({ user }));
           } else {
             console.log('no document found');
           }
         });
       } else {
+        this._user = null;
         this.userSubscrition();
         this.store.dispatch(unSetUser());
       }
