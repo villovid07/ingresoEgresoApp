@@ -8,6 +8,7 @@ import { AppState } from '../app.reducer';
 import { Store } from '@ngrx/store';
 import { setUser, unSetUser } from '../auth/auth.actions';
 import { getDoc, onSnapshot, Unsubscribe } from 'firebase/firestore';
+import { unsetItems } from '../ingreso-egreso/ingreso-egreso.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +58,7 @@ export class AuthService {
             const user = Usuario.fromFirestore(doc.data());
             this._user = user;
             this.store.dispatch(setUser({ user }));
+
           } else {
             console.log('no document found');
           }
@@ -65,6 +67,7 @@ export class AuthService {
         this._user = null;
         this.userSubscrition();
         this.store.dispatch(unSetUser());
+        this.store.dispatch(unsetItems());
       }
     });
   }
