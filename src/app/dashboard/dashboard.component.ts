@@ -31,8 +31,8 @@ export class DashboardComponent {
   }
 
   ngOnDestroy(){
-    this.userSubs.unsubscribe();
-    this.subscriptionIngreso.unsubscribe();
+    this.userSubs?.unsubscribe();
+    this.subscriptionIngreso?.unsubscribe();
   }
 
 }
