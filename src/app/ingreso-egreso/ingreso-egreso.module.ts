@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutesModule } from '../dashboard/dashboard-routes.module';
+import { StoreModule } from '@ngrx/store';
+import { ingresoEgresoReducer } from './ingreso-egreso.reducer';
 
 
 
@@ -25,6 +27,7 @@ import { DashboardRoutesModule } from '../dashboard/dashboard-routes.module';
     ReactiveFormsModule,
     NgChartsModule,
     SharedModule,
+    StoreModule.forFeature('ingresosEgresos',ingresoEgresoReducer),
     DashboardRoutesModule
   ]
 })
